@@ -1,5 +1,6 @@
 import NextAuth from "next-auth";
 import GoogleProvider from "next-auth/providers/google";
+import { getPipedreamClient } from "@/lib/pipedream";
 
 const handler = NextAuth({
   providers: [
@@ -32,5 +33,8 @@ const handler = NextAuth({
     },
   },
 });
+
+const { pd, token, expires_at, connect_link_url } = await getPipedreamClient();
+console.log(`pd ${pd} token ${token} expires_at ${expires_at} connect_link_url ${connect_link_url}`);
 
 export { handler as GET, handler as POST }; 
